@@ -216,7 +216,7 @@ class SAIALink(object):
 
     def resetWatchdog(self):
         self._alive=True
-        self._timeoutWatchdog=time.time()+20.0
+        self._timeoutWatchdog=time.time()+1
 
     def onMessage(self, mtype, mseq, payload):
         try:
