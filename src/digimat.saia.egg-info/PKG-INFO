@@ -34,7 +34,6 @@ Description: ===================
             >>> node.stop()
             >>> quit()
         
-        Please consider this work as *in progress* (but stable enough to provide reliable communication services).  Always use the latest version of this package, as it is frequently updated ! 
         Warning : if you observe a socket error at node start, this is probably due to the fact that the listening port is already opened on your machine from
         an other process. The default listening port is 5050. Try changing it to see if this fix the problem
         
@@ -755,9 +754,10 @@ Description: ===================
         on how to read/poll declared items. When your project has a lot of items to manage, this is not always
         easy to deal with the background refresh timing of some items. Do you remember the SAIAItem .read() and .refresh()
         methods described above ? As a reminder, these refresh orders are **processed with more priority** than other "standard" polling-read, providing better responsiveness.
-        The SAIAItemGroup object provides a simple way to use this specific "urgent" polling for groups of items.
+        Remember that the communication process is always fully asynchronous, so that a blocking read is equivalent to "tag some items as poll-urgent and
+        wait a certain amount of time until they are all refreshed by the background task". 
         
-        An item group is an instance of the SAIAItemGroup object
+        The SAIAItemGroup object provides a simple way to use this specific "urgent" polling for groups of items. An item group is an instance of the SAIAItemGroup object
         
         .. code-block:: python
         
