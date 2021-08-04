@@ -147,11 +147,11 @@ class SAIALink(object):
                         if self._request._broadcast:
                             self.setState(SAIALink.COMMSTATE_SUCCESS)
                         else:
-                            self.setState(SAIALink.COMMSTATE_WAITRESPONSE, 3.0)
+                            self.setState(SAIALink.COMMSTATE_WAITRESPONSE, 0.5)
                         return True
                     else:
                         self.setState(SAIALink.COMMSTATE_ERROR)
-                        self.server.pause(15.0)
+                        self.server.pause(1.0)
 
                 self.reset()
                 return
@@ -216,7 +216,7 @@ class SAIALink(object):
 
     def resetWatchdog(self):
         self._alive=True
-        self._timeoutWatchdog=time.time()+20.0
+        self._timeoutWatchdog=time.time()+1.0
 
     def onMessage(self, mtype, mseq, payload):
         try:
@@ -593,7 +593,7 @@ class SAIAServer(object):
         return self.submitTransfer(transfer)
 
     def refreshStatus(self):
-        self._timeoutStatus=time.time()+5.0
+        self._timeoutStatus=time.time()+1.0
         transfer=SAIATransferFromRequest(SAIARequestReadPcdStatusOwn(self.link))
         return self.submitTransfer(transfer)
 
