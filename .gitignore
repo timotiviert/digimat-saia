@@ -13,3 +13,6 @@
 *.csv
 *.bak
 
+.idea
+./venv/
+

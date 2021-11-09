@@ -59,6 +59,14 @@ class SAIAItemGroup(object):
             self._items.append(item)
             return item
 
+    def remove(self, item):
+        if item:
+            try:
+                i = self._itemsIndexById.pop(id(item))
+                self._items.pop(i)
+            except:
+                pass
+
     def refresh(self, urgent=False):
         if self._items:
             for item in self.all():
