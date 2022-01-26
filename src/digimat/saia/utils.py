@@ -8,7 +8,10 @@ def unpack_bin(binary: bytes) -> list:
     for i, b in enumerate(binary_strings):
         bools = [bool(int(char)) for char in binary_strings[i]]
         bools.reverse()
+        while len(bools) < 8:
+            bools.append(False)
         binary_strings[i] = bools
+
     return binary_strings
 
 
