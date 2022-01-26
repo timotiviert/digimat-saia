@@ -38,8 +38,8 @@ from .response import SAIAResponseNAK
 
 from .items import SAIAItemGroup
 
-from .ModbusDataLib import bin2boollist
-
+# from .ModbusDataLib import bin2boollist
+from .utils import unpack_bin
 
 # NOTICE
 # ------
@@ -219,7 +219,7 @@ class SAIAHandler_WRITE_OUTPUTS(SAIANodeRequestHandler):
             items=self.node.memory.outputs
             (bytecount, address, fiocount)=struct.unpack('>BHB', data[0:4])
             if address>=0 and fiocount<=32:
-                values=bin2boollist(data[4:])
+                values=unpack_bin(data[4:])
                 for n in range(fiocount+1):
                     items[address+n].value=values[n]
                 return self.ack()
@@ -233,7 +233,7 @@ class SAIAHandler_WRITE_FLAGS(SAIANodeRequestHandler):
             items=self.node.memory.flags
             (bytecount, address, fiocount)=struct.unpack('>BHB', data[0:4])
             if address>=0 and fiocount<=32:
-                values=bin2boollist(data[4:])
+                values=unpack_bin(data[4:])
                 for n in range(fiocount+1):
                     items[address+n].value=values[n]
                 return self.ack()
