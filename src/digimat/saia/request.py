@@ -6,7 +6,7 @@ import time
 from functools import reduce
 from builtins import bytes
 
-from .ModbusDataLib import bin2boollist
+from .utils import unpack_bin
 from .ModbusDataLib import boollist2bin
 
 # This is the precalculated hash table for CCITT V.41.
@@ -502,7 +502,7 @@ class SAIARequestReadCounters(SAIARequestReadAnalogItems):
 
 class SAIARequestReadBooleanItems(SAIARequestReadItems):
     def extractValuesFromPayload(self, payload):
-        return bin2boollist(payload)
+        return unpack_bin(payload)
 
 
 class SAIARequestReadFlags(SAIARequestReadBooleanItems):
